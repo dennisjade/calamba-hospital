@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var sessionOptions = {
-  url: 'mongodb://calamba:hospital@localhost:27017/calamba'
+  url: 'mongodb://localhost/calamba'
 }
 app.use(session({
     secret: 'cala3ba',
@@ -64,4 +64,3 @@ app.locals._ = require("underscore");
 // });
 
 module.exports = app;
-
