@@ -1,0 +1,26 @@
+html
+  title Calamba District Hospital
+  link(href='stylesheets/login.css', rel='stylesheet', type='text/css', media='all')
+
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+  meta(name='keywords', content='calamba hospital government')
+  body
+    .main
+      if error
+        h1 Invalid login credentials. Please try again
+      else
+        h1 Please login
+      .content
+        #container
+          form(action='server/authenticate', method='post')
+            #first_step
+              .form
+                h5 Username
+                input#username(type='text', name='username', value='')
+                h5 Password
+                input#password(type='password', name='password', value='')
+              input#login(type='submit', name='login', value='Login')
+
+  script(src='/bower_components/jquery/dist/jquery.min.js')
+  script(src='javascripts/login.js')

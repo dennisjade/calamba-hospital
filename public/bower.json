@@ -1,0 +1,30 @@
+{
+  "name": "public",
+  "authors": [
+    "Dencio Toribio <dencio.toribio@ph.ibm.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "google-fonts": "*",
+    "moment": "^2.11.2",
+    "jquery": "^2.2.0",
+    "swipebox": "^1.4.1",
+    "moment-timezone": ">=0.4.0",
+    "jquery-ui": "^1.11.4",
+    "underscore": "^1.8.3",
+    "easing": "*",
+    "bootstrap": "^3.3.6"
+  }
+}

@@ -1,0 +1,89 @@
+// header start here
+.header
+  .container
+    .header-main
+      .header-left
+        .logo
+          h1
+            a(href='#') LOGO
+        .social-icons
+          ul
+            li
+              a(href='#')
+                span.fa  
+        .clearfix
+        .white-color Calamba District Hospital
+      // Menu Structure
+      #fdw
+        // nav
+        nav
+          ul
+            li
+              a(href='/')
+                | home
+                span.arrow
+              //
+                <ul style="display: none;" class="sub_menu">
+                <li class="arrow_top"></li>
+                <li><a class="subCurrent" href="http://www.freshdesignweb.com">Home Service</a></li>
+                </ul>
+            if _.contains(user.permissions,'admin') || _.contains(user.permissions,'opd')
+              li
+                a.admission(href='/server/admission') admission
+            else
+              li
+                a(href='#', title='Admitting patients is not allowed on your credentials.') admission
+            li
+              if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab') || _.contains(user.permissions,'meds') || _.contains(user.permissions,'pharma')
+                a(href='#')
+                  | utilities
+                span.arrow
+                ul.sub_menu(style='display: none;')
+                  li.arrow_top
+                  if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab')
+                    li
+                      a(href='#') laboratory
+                  if _.contains(user.permissions,'admin') || _.contains(user.permissions,'meds')
+                    li
+                      a(href='#') medicines
+                  if _.contains(user.permissions,'admin') || _.contains(user.permissions,'pharma')
+                    li
+                      a(href='#') pharmacy
+              else
+                a(href='#', title='Your credentials does not permit you to manage these utilities.')
+                  | utilities
+            li
+              a(href='#')
+                | patient
+                span.arrow
+              ul.sub_menu(style='display: none;')
+                li.arrow_top
+                li
+                  a(href='#') Search
+            li
+              if _.contains(user.permissions,'admin') || _.contains(user.permissions,'billing')
+                a(href='#')
+                  | reports
+                span.arrow
+                ul.sub_menu(style='display: none;')
+                  li.arrow_top
+                  li
+                    a(href='#') Billing
+                  li
+                    a(href='#') Inventory
+              else
+                a(href='#',title='Your credentials does not permit you to manange and view billing info.')
+                  | reports
+            li
+              a(href='#')
+                | profile
+                span.arrow
+              ul.sub_menu(style='display: none;')
+                li.arrow_top
+                li
+                  a.account(href='#') Account
+                li
+                  a(href='/logout') Logout
+      // end fdw
+      .clearfix  
+// header ends here
