@@ -2,28 +2,36 @@ extends ../layout
 
 block content
   .block-container.banner
-    .admission-form
-      .admission-form-size
+    .body-form
+      .body-form-size
         .page-controls.pull-right
-          button.btn-info.btn#searchItem(type="button")
-            span.glyphicon.glyphicon-search(aria-hidden="true")
-            |&nbsp;Search Item
+          button.btn-info.btn#addItem(type="button")
+            span.glyphicon.glyphicon-plus(aria-hidden="true")
+            |&nbsp;Add Item
         h1.page-label Inventory
         br
-        form.form-horizontal.inventoryForm
-          .form-group
-            label.col-sm-4.control-label(for='itemName') Item Name
-            .col-sm-6
-              input#itemName.form-control(type='input', name="itemName", placeholder='Item Name')
-          .form-group
-            label.col-sm-4.control-label(for='itemQuan') Quantity
-            .col-sm-6
-              input#itemQuan.form-control(type='number', name="itemQuan", value="0", min="0")
-          .form-group
-            label.col-sm-4.control-label(for='itemDesc') Description
-            .col-sm-6
-              textarea#itemDesc.form-control(name="itemDesc", placeholder='Item Description')
-          .form-group
-            .col-sm-offset-4.col-sm-2
-              button.btn.btn-primary#saveItem(type='button') Save Item
-            .col-sm-6.serverResponse
+        table#inventoryItems.stripe.row-border.hover
+          thead
+            tr
+              th ID
+              th Date
+              th Item Name
+              th Quantity
+              th Description
+              th.dt-center Actions
+
+    #overlay-edit-dialog(title="Edit Item")
+      form
+        input#itemID(type="hidden")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#itemName.form-control(type='text', name="itemName", placeholder="Item Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#itemQuantity.form-control(type='number', name="itemQuantity", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#itemDesc.form-control(name="itemDesc", placeholder="Item Description")
