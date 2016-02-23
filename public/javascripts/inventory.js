@@ -12,6 +12,30 @@
     $("#overlay-edit-dialog #itemDesc").val(data.itemDesc);
   }
 
+  validateFields = function($frm) {
+    var item_name = $frm.find('#itemName').val();
+    var item_desc = $frm.find('#itemDesc').val();
+    if(!item_name || !item_desc) return false;
+    return true;
+  }
+
+  clearForm = function(_id) {
+    $(_id).find("#itemName, #itemDesc").val('');
+    $(_id).find("#itemQuantity").val(1);
+  }
+
+  initDialog = function(_id, btnActions) {
+    return $(_id).dialog({
+      autoOpen: false,
+      resizable: false,
+      width: 700,
+      height: "auto",
+      modal: true,
+      show: { effect: "slideDown", duration: 100 },
+      buttons: btnActions,
+    });
+  }
+
   var inventoryItems = $('#inventoryItems').DataTable({
     "ajax": "/api/inventory/?datatable=true",
     "columns": [
@@ -22,6 +46,7 @@
       { "data": "itemDesc" },
       { "data": "Actions" }
     ],
+
     "columnDefs": [
       {
         "targets": 1,
@@ -47,6 +72,7 @@
         }
       }
     ],
+
     "fnDrawCallback": function(settings) {
 
       // Edit item modal
@@ -73,27 +99,50 @@
     }
   });
 
-  var editDialog = $( "#overlay-edit-dialog").dialog({
-    autoOpen: false,
-    resizable: false,
-    width: 700,
-    height: "auto",
-    modal: true,
-    show: { effect: "slideDown", duration: 100 },
-    buttons: {
-      "Update": function() {
-        var frm = $("#overlay-edit-dialog form").serialize(),
-            _id = $("#overlay-edit-dialog #itemID").val();
+  // Trigger create item dialog
+  $('#addItem').click(function() {
+    addDialog.dialog('open');
+    clearForm("#overlay-add-dialog form");
+  });
 
-        execAjax('/api/inventory/' + _id, 'PUT', frm).success( function(resp) {
-          editDialog.dialog('close');
+  // Edit item UI dialog
+  var editBtnActions = {
+    "Update": function() {
+      var frm = $("#overlay-edit-dialog form").serialize(),
+          _id = $("#overlay-edit-dialog #itemID").val();
+      // Execute update request
+      execAjax('/api/inventory/' + _id, 'PUT', frm).success( function(resp) {
+        editDialog.dialog('close');
+        inventoryItems.ajax.reload();
+      });
+    },
+    "Cancel": function() {
+      $(this).dialog("close");
+    }
+  }
+
+  // Add item UI dialog
+  var addBtnActions = {
+    "Create": function() {
+      var $frm = $("#overlay-add-dialog form");
+      var serialData = $("#overlay-add-dialog form").serialize();
+
+      if(validateFields($frm)) {
+        // Execute POST/ create request
+        execAjax('/api/inventory/', 'POST', serialData).success( function(resp) {
+          addDialog.dialog('close');
           inventoryItems.ajax.reload();
         });
-      },
-      "Cancel": function() {
-        $( this ).dialog( "close" );
+      } else {
+        alert("Please completed required fields.");
       }
+    },
+    "Cancel": function() {
+      $(this).dialog("close");
     }
-  });
+  }
+
+  var editDialog = initDialog("#overlay-edit-dialog", editBtnActions);
+  var addDialog = initDialog("#overlay-add-dialog", addBtnActions);
 
 }).call(this)
