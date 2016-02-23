@@ -4,7 +4,8 @@
 
   var InventorySchema = {
     itemName : {
-      type : String
+      type : String,
+      trim: true,
       index: true
     },
     itemQuantity: {
@@ -17,13 +18,14 @@
     deleted: {
       type: Boolean,
       default: false
-    }
+    },
     updatedBy: {
-      type: String
+      type: String,
+      trim: true
     },
     updateDate:{
       type: Date,
-      "default": function() {
+      default: function() {
         return new Date()
       }
     }
@@ -32,14 +34,14 @@
   var Inventory = modelHelper.createSchemaModel('Inventory', InventorySchema);
   module.exports.model = Inventory;
 
-
+  // Define Inventory model methods
   module.exports = {
 
-    saveItem = function(req, admitObj, callback) {
+    saveItem : function(newObj, callback) {
       var inventoryObj = new Inventory();
-      for(prop in admitObj) {
-        if(AdmissionSchema[prop] != null) {
-          inventoryObj[prop] = admitObj[prop];
+      for(prop in newObj) {
+        if(InventorySchema[prop] != null) {
+          inventoryObj[prop] = newObj[prop];
         }
       }
 
@@ -49,17 +51,43 @@
       });
     },
 
-    getItems = function(callback) {
-      Inventory.model.find({}, function(err, items) {
+    getAllItems : function(callback) {
+      Inventory.find({deleted: false}, function(err, items) {
         if(err) return callback(err, null);
         callback(null, items);
       });
     },
 
-    removeItem = function(_id, callback) {
-      Inventory.model.find({_id: _id}, function(err, itemObj) {
+    getItem : function(_id, callback) {
+      Inventory.find({_id: _id}, function(err, itemObj) {
         if(err) return callback(err, null);
-        if(!itemObj) return callback("Item " + _id + " not found", null);
+        if(!itemObj) return callback("Item `" + _id + "` not found", null);
+        callback(null, itemObj);
+      });
+    },
+
+    updateItem : function(_id, updateObj, callback) {
+      Inventory.findOne({_id: _id}, function(err, itemObj) {
+        if(err) return callback(err, null);
+        if(!itemObj) return callback("Item `" + _id + "` not found", null);
+
+        for(prop in updateObj) {
+          if(InventorySchema[prop] != null) {
+            itemObj[prop] = updateObj[prop];
+          }
+        }
+
+        itemObj.save(function(err) {
+          if(err) return callback(err, null);
+          callback(null, itemObj);
+        });
+      });
+    },
+
+    removeItem : function(_id, callback) {
+      Inventory.findOne({_id: _id}, function(err, itemObj) {
+        if(err) return callback(err, null);
+        if(!itemObj) return callback("Item `" + _id + "` not found", null);
 
         itemObj.deleted = true;
         itemObj.save(function(err) {
