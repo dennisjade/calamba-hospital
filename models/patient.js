@@ -31,6 +31,10 @@
       index: true,
       trim:true
     },
+    isCurrentlyAdmitted: {
+      type: Boolean,
+      default: false
+    },
     bday: {
       type: Date
     },
