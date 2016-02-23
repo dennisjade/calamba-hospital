@@ -25,6 +25,7 @@
     "jquery-ui": "^1.11.4",
     "underscore": "^1.8.3",
     "easing": "*",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "datatables": "^1.10.11"
   }
 }
