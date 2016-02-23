@@ -1,26 +1,27 @@
 doctype html
 html
   head
-    title Calamba District Hospital
-    
+    title
+      |Calamba District Hospital - #{page.toUpperCase()}
+
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     meta(name='keywords', content='calamba hospital government')
 
     //script(type='application/x-javascript').
     //  addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-    
+
     // Google Fonts
     link(href='/stylesheets/googlefont_cambo.css', rel='stylesheet', type='text/css')
     link(href='/stylesheets/googlefont_hind.css', rel='stylesheet', type='text/css')
-    
+
     link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css', type='text/css', media='all')
     link(rel='stylesheet', href='/bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css')
     link(rel='stylesheet', href='/stylesheets/style_common.css')
     link(rel='stylesheet', href='/stylesheets/style4.css')
     link(rel='stylesheet', href='/stylesheets/swipebox.css')
     link(rel='stylesheet', href='/stylesheets/menu-navigation.css')
-    link(rel='stylesheet', href='/stylesheets/admission-form.css')    
+    link(rel='stylesheet', href='/stylesheets/admission-form.css')
     link(rel='stylesheet', href='/stylesheets/style.css', type='text/css', media='all')
   body
     include header
@@ -40,5 +41,3 @@ html
 
     if page=='admission'
       script(src='/javascripts/admission.js')
-
-
