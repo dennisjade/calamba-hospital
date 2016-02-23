@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    .admission-form
+      .admission-form-size
+        br
+        form.form-horizontal.admissionForm
+          .form-group
+            label.col-sm-4.control-label(for='fname') Patient Id
+            .col-sm-6
+              input#patientId.form-control(type='input', name="patientId", disabled="disabled")
+          .form-group
+            label.col-sm-4.control-label(for='fname') First Name
+            .col-sm-6
+              input#fname.form-control(type='input', name="fname", placeholder='patient first name')
+              a.searchPatient(href="#") Search patient
+          .form-group
+            label.col-sm-4.control-label(for='mname') Middle Name
+            .col-sm-6
+              input#mname.form-control(type='input', name="mname", placeholder='patient middle name')
+          .form-group
+            label.col-sm-4.control-label(for='lname') Last Name
+            .col-sm-6
+              input#lname.form-control(type='input', name="lname", placeholder='patient last name')
+          .form-group
+            label.col-sm-4.control-label(for='gender') Gender
+            .col-sm-6
+                label.radio-inline
+                  input#genderMale(type='radio', name='gender', value='male')
+                  |  Male
+                label.radio-inline
+                  input#genderFemale(type='radio', name='gender', value='female')
+                  |  Female
+          .form-group
+            label.col-sm-4.control-label(for='bday') Birthday
+            .col-sm-6
+              input#datetimepickerBday.form-control(type='text', name="bday", placeholder="mm/dd/yyyy")
+          .form-group
+            label.col-sm-4.control-label(for='address') Address
+            .col-sm-6
+              textarea#address.form-control(name="address", placeholder='patient address')
+          hr
+          .form-group
+            label.col-sm-4.control-label(for='address') Complain
+            .col-sm-6
+              textarea#complain.form-control(name="complain", placeholder='patient address')
+          .form-group
+            .col-sm-offset-4.col-sm-2
+              button.btn.btn-primary#admitPatient(type='button') Admit Patient
+            .col-sm-6.serverResponse
