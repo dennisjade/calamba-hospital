@@ -35,3 +35,18 @@ block content
           .col-md-3 Description
           .col-md-9
             textarea#itemDesc.form-control(name="itemDesc", placeholder="Item Description")
+
+    #overlay-add-dialog(title="Add New Item")
+      form
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#itemName.form-control(type='text', name="itemName", placeholder="Item Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#itemQuantity.form-control(type='number', name="itemQuantity", value="1", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#itemDesc.form-control(name="itemDesc", placeholder="Item Description")
