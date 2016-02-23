@@ -1,9 +1,5 @@
 (function () {
 
-  execAjax = function(url, type, data) {
-    return $.ajax({ url: url, type: type, data: data, dataType: 'JSON' });
-  }
-
   populateFields = function(obj) {
     var data = JSON.parse(obj);
     $("#overlay-edit-dialog #itemID").val(data._id);
@@ -22,18 +18,6 @@
   clearForm = function(_id) {
     $(_id).find("#itemName, #itemDesc").val('');
     $(_id).find("#itemQuantity").val(1);
-  }
-
-  initDialog = function(_id, btnActions) {
-    return $(_id).dialog({
-      autoOpen: false,
-      resizable: false,
-      width: 700,
-      height: "auto",
-      modal: true,
-      show: { effect: "slideDown", duration: 100 },
-      buttons: btnActions,
-    });
   }
 
   var inventoryItems = $('#inventoryItems').DataTable({
@@ -142,6 +126,7 @@
     }
   }
 
+  // Initialize dialogs
   var editDialog = initDialog("#overlay-edit-dialog", editBtnActions);
   var addDialog = initDialog("#overlay-add-dialog", addBtnActions);
 
