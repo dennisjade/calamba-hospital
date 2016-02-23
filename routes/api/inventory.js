@@ -13,7 +13,12 @@
     }
 
     createItem = function(req, res) {
-      Inventory.saveItem(req.body, function(err, createdItem) {
+      var itemFields = {
+        itemName: req.body.itemName,
+        itemQuantity: req.body.itemQuantity,
+        itemDesc: req.body.itemDesc,
+      };
+      Inventory.saveItem(itemFields, function(err, createdItem) {
         if(err) return res.status(500).send(err);
         res.status(201).json(createdItem);
       });
