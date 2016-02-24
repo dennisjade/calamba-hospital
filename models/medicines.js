@@ -59,7 +59,7 @@
     },
 
     getMedicine : function(_id, callback) {
-      Medicine.find({_id: _id}, function(err, medicineObj) {
+      Medicine.findOne({_id: _id}, function(err, medicineObj) {
         if(err) return callback(err, null);
         if(!medicineObj) return callback("Item `" + _id + "` not found", null);
         callback(null, medicineObj);
