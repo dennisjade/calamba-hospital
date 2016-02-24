@@ -28,7 +28,11 @@ block content
           .col-md-9
             input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
         .row(style="margin-bottom: 10px")
-          .col-md-3 Quantity
+          .col-md-3 Add Quantity
+          .col-md-6
+            .in_stock
+              |Item in Stock --&nbsp;
+              span 0
           .col-md-3
             input#medicineQuantity.form-control(type='number', name="medicineQuantity", min="0")
         .row
