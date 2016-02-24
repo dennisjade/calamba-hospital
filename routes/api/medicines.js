@@ -1,5 +1,7 @@
 (function() {
-  var Medicine = require('../../models/medicines')
+
+  var Medicine = require('../../models/medicines'),
+      MedicineMeta = require('../../models/medicines-meta-actions')
 
   module.exports = function(app) {
 
@@ -25,10 +27,41 @@
     }
 
     updateMedicine = function(req, res) {
-      Medicine.updateMedicine(req.params.medicineID, req.body, function(err, updatedObj) {
+
+      // Create promise to defer update Meds
+      var medicineID = req.params.medicineID;
+
+      MedicineMeta.createAction(medicineID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
-        res.status(200).json(updatedObj)
+        if(response.affected > 0) {
+          Medicine.updateMedicine(medicineID, req.body, function(errUpdate, updatedObj) {
+            if(err) return res.status(500).send(errUpdate);
+            res.status(200).json(updatedObj);
+          });
+        } else {
+          res.status(200).json({status: 200, message: "Medicine record still up to date"});
+        }
       });
+
+      // var updateMedPromise = new Promise(function(resolve, reject) {
+      //   Medicine.updateMedicine(medicineID, req.body, function(err, updatedObj) {
+      //     if(err) {
+      //       reject(Error(err));
+      //     } else {
+      //       resolve(updatedObj);
+      //     }
+      //   });
+      // });
+      //
+      // updateMedPromise().then(function(updatedObj) {
+      //   // Create medicine metaaction during update
+      //   MedicineMeta.createAction(medicineID, updatedObj, function(err, response) {
+      //     if(err) return res.status(500).send(err);
+      //     res.status(200).json(updatedObj);
+      //   });
+      // }).catch(function(err) {
+      //   res.status(500).send(err);
+      // });
     }
 
     removeMedicine = function(req, res) {
