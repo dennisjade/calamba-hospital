@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    .body-form
+      .body-form-size
+        .page-controls.pull-right
+          button.btn-info.btn#addService(type="button")
+            span.glyphicon.glyphicon-plus(aria-hidden="true")
+            |&nbsp;Add Service
+        h1.page-label Services
+        br
+        table#serviceItems.stripe.row-border.hover
+          thead
+            tr
+              th ID
+              th Date
+              th Service Name
+              th Price
+              th Description
+              th.dt-center Actions
+
+    #overlay-edit-service-dialog(title="Edit Service")
+      form
+        input#serviceID(type="hidden")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#serviceName.form-control(type='text', name="serviceName", placeholder="Service Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Price
+          .col-md-3
+            input#servicePrice.form-control(type='number', name="servicePrice", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#serviceDesc.form-control(name="serviceDesc", placeholder="Service Description")
+
+    #overlay-add-service-dialog(title="Add New Service")
+      form
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#serviceName.form-control(type='text', name="serviceName", placeholder="Service Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Price
+          .col-md-3
+            input#servicePrice.form-control(type='number', name="servicePrice", value="1", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#serviceDesc.form-control(name="serviceDesc", placeholder="Service Description")

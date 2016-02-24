@@ -10,7 +10,7 @@
           ul
             li
               a(href='#')
-                span.fa  
+                span.fa
         .clearfix
         .white-color Calamba District Hospital
       // Menu Structure
@@ -49,6 +49,8 @@
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'pharma')
                     li
                       a(href='#') pharmacy
+                  li
+                    a(href='/utilities/services') services
               else
                 a(href='#', title='Your credentials does not permit you to manage these utilities.')
                   | utilities
@@ -70,7 +72,7 @@
                   li
                     a(href='#') Billing
                   li
-                    a(href='#') Inventory
+                    a(href='/reports/inventory') Inventory
               else
                 a(href='#',title='Your credentials does not permit you to manange and view billing info.')
                   | reports
@@ -85,5 +87,5 @@
                 li
                   a(href='/logout') Logout
       // end fdw
-      .clearfix  
+      .clearfix
 // header ends here

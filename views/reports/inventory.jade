@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    .body-form
+      .body-form-size
+        .page-controls.pull-right
+          button.btn-info.btn#addItem(type="button")
+            span.glyphicon.glyphicon-plus(aria-hidden="true")
+            |&nbsp;Add Item
+        h1.page-label Inventory
+        br
+        table#inventoryItems.stripe.row-border.hover
+          thead
+            tr
+              th ID
+              th Date
+              th Item Name
+              th Quantity
+              th Description
+              th.dt-center Actions
+
+    #overlay-edit-dialog(title="Edit Item")
+      form
+        input#itemID(type="hidden")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#itemName.form-control(type='text', name="itemName", placeholder="Item Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#itemQuantity.form-control(type='number', name="itemQuantity", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#itemDesc.form-control(name="itemDesc", placeholder="Item Description")
+
+    #overlay-add-dialog(title="Add New Item")
+      form
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#itemName.form-control(type='text', name="itemName", placeholder="Item Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#itemQuantity.form-control(type='number', name="itemQuantity", value="1", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#itemDesc.form-control(name="itemDesc", placeholder="Item Description")

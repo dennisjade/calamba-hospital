@@ -11,7 +11,7 @@ p {margin: 0;}
 html, body{
   font-family: 'Hind', sans-serif;
    font-size: 100%;
-   background:#fff; 
+   background:#fff;
 }
 a {
   text-decoration: none;
@@ -328,8 +328,8 @@ span.glyphicon.glyphicon-leaf{
   height: 100%;
   border-radius: 50%;
   content: '';
-  -webkit-box-sizing: content-box; 
-  -moz-box-sizing: content-box; 
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -672,7 +672,7 @@ background:#000000;
 @media(max-width:1024px){
 .banner {
     min-height: 600px;
-} 
+}
 .banner-main p {
     width: 78%;
 }
@@ -925,7 +925,7 @@ span.quota2 {
     width: 60%;
 }
 .top-navg {
-    width: 40%; 
+    width: 40%;
 }
 }
 @media(max-width:640px){
@@ -982,12 +982,12 @@ span.quota2 {
 }
 .ftr-grid input[type="submit"] {
     width: 20%;
-} 
+}
 }
 @media(max-width:480px){
 .header-left {
     width: 75%;
-} 
+}
 .top-navg {
     width: 25%;
 }
@@ -1084,7 +1084,7 @@ span.quota2 {
 @media(max-width:414px){
 .social-icons ul li a span {
     margin: 0em 0.5em 0em 0em;
-} 
+}
 }
 @media(max-width:384px){
  .social-icons ul li a span {
@@ -1097,7 +1097,7 @@ span.quota2 {
 }
 .logo {
     width: 50%;
-} 
+}
 .social-icons {
     padding-top: 0.5em;
 }
@@ -1288,6 +1288,25 @@ span.menu img {
   height: :100%;
 }
 
-.admission-form-size{
+.body-form {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  left: 33%;
+  margin-left: -15em;
+  margin-top: -9em;
+  position: fixed;
+  top: 33%;
+  width: 60em;
+  padding: 20px;
+}
+
+.admission-form-size, .body-form-size {
   width: 100%
+}
+
+.truncate {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
