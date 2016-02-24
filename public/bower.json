@@ -27,6 +27,7 @@
     "easing": "*",
     "bootstrap": "^3.3.6",
     "datatables.net": "^1.10.11",
-    "datatables.net-dt": "^1.10.11"
+    "datatables.net-dt": "^1.10.11",
+    "datatables": "^1.10.11"
   }
 }
