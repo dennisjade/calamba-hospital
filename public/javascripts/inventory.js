@@ -10,8 +10,7 @@
 
   validateFields = function($frm) {
     var item_name = $frm.find('#itemName').val();
-    var item_desc = $frm.find('#itemDesc').val();
-    if(!item_name || !item_desc) return false;
+    if(!item_name) return false;
     return true;
   }
 

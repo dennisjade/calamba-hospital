@@ -10,8 +10,7 @@
 
   validateFields = function($frm) {
     var service_name = $frm.find('#serviceName').val();
-    var service_desc = $frm.find('#servicePrice').val();
-    if(!service_name || !service_desc) return false;
+    if(!service_name) return false;
     return true;
   }
 
