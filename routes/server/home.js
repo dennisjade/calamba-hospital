@@ -8,13 +8,15 @@
         return res.redirect('/login')
       }else{
         json.user = req.session.user;
+        json.page = "home";
         return res.render('home.jade', json)
       };
     }
 
     showLogin = function(req, res){
       var json = {}
-      json.error = req.query.error || ''
+      json.error = req.query.error || '';
+      json.page = "login";
       res.render('login.jade', json)
     }
 
