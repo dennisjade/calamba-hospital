@@ -43,12 +43,9 @@
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab')
                     li
                       a(href='#') laboratory
-                  if _.contains(user.permissions,'admin') || _.contains(user.permissions,'meds')
-                    li
-                      a(href='#') medicines
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'pharma')
                     li
-                      a(href='#') pharmacy
+                      a(href='/utilities/pharmacy') pharmacy
                   li
                     a(href='/utilities/services') services
               else
