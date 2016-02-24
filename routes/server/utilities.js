@@ -9,12 +9,11 @@
       // serve laboratory route
     },
 
-    medicines = function(req, res) {
-      // serve medicines route
-    },
-
     pharmacy = function(req, res) {
-      // serve pharmacy route
+      var json = {};
+      json.user = req.session.user;
+      json.page = 'pharmacy';
+      res.render('utilities/pharmacy.jade', json);
     },
 
     services = function(req, res) {
@@ -26,6 +25,7 @@
 
     // Refer route map
     app.get('/utilities/services', services);
+    app.get('/utilities/pharmacy', pharmacy);
   }
 
 }).call(this);
