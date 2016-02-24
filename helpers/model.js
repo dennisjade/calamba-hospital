@@ -4,9 +4,10 @@
   var autoIncrement = require('mongoose-auto-increment');
 
   _ = require('underscore');
+  Async = require('async');
 
   config = require('../config');
-  
+
   DB = config.getDB();
 
   Schema = mongoose.Schema;
@@ -14,7 +15,7 @@
   conn = mongoose.connect(DB);
 
   autoIncrement.initialize(conn);
-  
+
   mongoose.connection.on("error", function(err) {
     console.error("MongoDB error: %s", err);
   });
@@ -34,4 +35,34 @@
     schema.set('autoIndex', false);
     return conn.model(modelName, schema);
   };
+
+  module.exports.getAffectedRows = function(_id, oldObj, newObj, fieldArray, callback) {
+    var rowsAffected = [], cDate = new Date();
+
+    // Iterate thru each keys provided
+    Async.eachSeries(fieldArray, function(v, cb) {
+      // Verify property existence to each object
+      if(v in oldObj && v in newObj) {
+
+        // Sanitize object values
+        oldObj[v] = (!Number.isNaN(oldObj[v]*1) && oldObj[v] !== "" ? oldObj[v]*1 : oldObj[v].trim());
+        newObj[v] = (!Number.isNaN(newObj[v]*1) && newObj[v] !== "" ? newObj[v]*1 : newObj[v].trim());
+
+        // Check field value difference
+        if(oldObj[v] != newObj[v]) {
+
+          // Populate affected fields
+          rowsAffected.push({
+            metaRef: mongoose.Types.ObjectId(_id), columnAffected: v, oldValue: oldObj[v], newValue: newObj[v], changeDate: cDate,
+          });
+
+        } setImmediate(cb);
+      } else {
+        setImmediate(cb);
+      }
+    }, function(err) {
+      callback(rowsAffected);
+    });
+  };
+
 }).call(this);
