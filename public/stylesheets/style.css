@@ -1310,3 +1310,14 @@ span.menu img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.in_stock {
+  background: #1abc9c none repeat scroll 0 0;
+  color: #fff;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.in_stock span {
+  font-weight: bold;
+}
