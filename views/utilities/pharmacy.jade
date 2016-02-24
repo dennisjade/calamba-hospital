@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    .body-form
+      .body-form-size
+        .page-controls.pull-right
+          button.btn-info.btn#addMedicine(type="button")
+            span.glyphicon.glyphicon-plus(aria-hidden="true")
+            |&nbsp;Add Medicine
+        h1.page-label Pharmacy
+        br
+        table#medicineItems.stripe.row-border.hover
+          thead
+            tr
+              th ID
+              th Date
+              th Medicine Name
+              th Quantity
+              th Description
+              th.dt-center Actions
+
+    #overlay-edit-medicine-dialog(title="Edit Medicine")
+      form
+        input#medicineID(type="hidden")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#medicineQuantity.form-control(type='number', name="medicineQuantity", min="0")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#medicineDesc.form-control(name="medicineDesc", placeholder="Medicine Description")
+
+    #overlay-add-medicine-dialog(title="Add New Medicine")
+      form
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Name
+          .col-md-9
+            input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-3 Quantity
+          .col-md-3
+            input#medicineQuantity.form-control(type='number', name="medicineQuantity", value="1", min="1")
+        .row
+          .col-md-3 Description
+          .col-md-9
+            textarea#medicineDesc.form-control(name="medicineDesc", placeholder="Medicine Description")
