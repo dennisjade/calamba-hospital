@@ -1,16 +1,24 @@
 (function() {
 
   populateFields = function(obj) {
-    var data = JSON.parse(obj);
-    $("#overlay-edit-medicine-dialog #medicineID").val(data._id);
-    $("#overlay-edit-medicine-dialog #medicineName").val(data.medicineName);
-    $("#overlay-edit-medicine-dialog #medicineQuantity").val(data.medicineQuantity);
-    $("#overlay-edit-medicine-dialog #medicineDesc").val(data.medicineDesc);
+    var data = JSON.parse(obj), dialogID = "#overlay-edit-medicine-dialog";
+    $(dialogID).prev('.ui-dialog-titlebar').find('span').text('Edit Medicine - ( ' + data.medicineName+ ' )');
+    $(dialogID + " #medicineID").val(data._id);
+    $(dialogID + " #medicineName").val(data.medicineName);
+    $(dialogID + " #medicineQuantity").val(0);
+    $(dialogID + " .in_stock span").text(data.medicineQuantity);
+    $(dialogID + " #medicineDesc").val(data.medicineDesc);
   }
 
   validateFields = function($frm) {
-    var medicine_name = $frm.find('#medicineName').val();
-    if(!medicine_name) return false;
+    var medicineName = $frm.find('#medicineName').val(),
+        medicineQuantity = $frm.find('#medicineQuantity').val();
+
+    if(!medicineName) {
+      return "Medicine name could not be empty.";
+    } else if(medicineQuantity < 0) {
+      return "Negative values not allowed";
+    }
     return true;
   }
 
@@ -37,7 +45,13 @@
           return "<span title='"+moment(r.updateDate).format('LT')+"'>"+moment(r.updateDate).format('ll')+  "</span>";
         }
       },
-      { "targets": 2, "width": "30%" },
+      {
+        "targets": 2,
+        "width": "30%",
+        "render": function(d, t, r) {
+          return "<div style='width: 255px' title='"+r.medicineName+"' class='truncate'>"+r.medicineName+"</div>"
+        }
+      },
       { "targets": 3, "className": "dt-center" },
       {
         "targets": 4,
@@ -91,13 +105,22 @@
   // Edit medicine UI dialog
   var editBtnActions = {
     "Update": function() {
-      var frm = $("#overlay-edit-medicine-dialog form").serialize(),
+      var $frm = $("#overlay-edit-medicine-dialog form"),
           _id = $("#overlay-edit-medicine-dialog #medicineID").val();
-      // Execute update request
-      execAjax('/api/medicines/' + _id, 'PUT', frm).success( function(resp) {
-        editMedicineDialog.dialog('close');
-        medicineItems.ajax.reload();
-      });
+
+      var serialData = $frm.serialize(),
+          notif = validateFields($frm);
+
+      if(typeof(notif) == "boolean") {
+        // Execute update request
+        execAjax('/api/medicines/' + _id, 'PUT', serialData).success( function(resp) {
+          editMedicineDialog.dialog('close');
+          medicineItems.ajax.reload();
+        });
+      } else {
+        alert(notif);
+      }
+
     },
     "Cancel": function() {
       $(this).dialog("close");
@@ -108,7 +131,7 @@
   var addBtnActions = {
     "Create": function() {
       var $frm = $("#overlay-add-medicine-dialog form");
-      var serialData = $("#overlay-add-medicine-dialog form").serialize();
+      var serialData = $frm.serialize();
 
       if(validateFields($frm)) {
         // Execute POST/ create request
