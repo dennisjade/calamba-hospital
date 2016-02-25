@@ -1321,3 +1321,8 @@ span.menu img {
 .in_stock span {
   font-weight: bold;
 }
+
+.ui-widget{
+  font-size:0.9em !important;
+}
+
