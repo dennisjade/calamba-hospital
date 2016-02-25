@@ -13,15 +13,18 @@
       var paginateStart = req.query.start
       var paginateLength = req.query.length
       var searchQuery = req.query.search
+
       var query = {
-        // $or: 
-        //   [
-        //     { fname: new RegExp(searchQuery, "i") },
-        //     { lname: new RegExp(searchQuery, "i") }
-        //   ]
-        lname : searchQuery.value,
+        $or: 
+          [
+            { fname: { $regex: searchQuery.value, $options: 'i'} },
+            { lname: { $regex: searchQuery.value, $options: 'i'} }
+          ],
         isCurrentlyAdmitted: (req.query.admitted=='true')
       }
+
+      if (!req.query.admitted)
+        delete query.isCurrentlyAdmitted
 
       sendResponse = function(data){
         if (req.query.datatable=='true')
@@ -31,9 +34,9 @@
 
         res.json(json)
       }
-
+      
       if (searchQuery.value.length==0)
-        return sendResponse([])
+        sendResponse([])
       else{
         Patient.getPatients(req, query, function(err, data){
           if (err){
@@ -42,7 +45,7 @@
             json.data = []
           }
 
-          return sendResponse(data)
+          sendResponse(data)
         })
       }
     }

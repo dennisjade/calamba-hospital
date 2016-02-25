@@ -62,6 +62,8 @@
                 li.arrow_top
                 li
                   a(href='#') Search
+                li
+                  a(href="/server/manage/patients") Manage Patients
             li
               if _.contains(user.permissions,'admin') || _.contains(user.permissions,'billing')
                 a(href='#')
