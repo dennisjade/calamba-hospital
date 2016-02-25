@@ -1,4 +1,4 @@
-$(function() {
+(function() {
 
   $('#login').click(function(event){
     var username = $('#username').val()
