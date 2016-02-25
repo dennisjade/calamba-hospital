@@ -1,7 +1,7 @@
 /* Slider
 http://www.freshdesignweb.com/drop-down-responsive-menu-with-css3-and-jquery.html
 */
-@import url(http://fonts.googleapis.com/css?family=Gentium+Basic:400,700|Yanone+Kaffeesatz);
+/*@import url(http://fonts.googleapis.com/css?family=Gentium+Basic:400,700|Yanone+Kaffeesatz);
 /*===== nav style ======*/
 #fdw nav select {
   display:none; /* this is just for the mobile display */
@@ -18,7 +18,7 @@ http://www.freshdesignweb.com/drop-down-responsive-menu-with-css3-and-jquery.htm
 }
 #fdw nav ul li a:link, #fdw nav ul li a:visited {
   color:#444;
-  font:normal 20px 'Yanone Kaffeesatz', sans-serif;
+  font:normal 15px 'Yanone Kaffeesatz', sans-serif;
   text-transform:uppercase;
   display:inline-block;
   position:relative;
@@ -56,7 +56,7 @@ http://www.freshdesignweb.com/drop-down-responsive-menu-with-css3-and-jquery.htm
 /*===== sub_menu Style =======*/
 #fdw nav ul li ul.sub_menu {
   position:absolute;
-  top:56px;
+  top:52px;
   left:0;
   margin:0;
   padding:0;

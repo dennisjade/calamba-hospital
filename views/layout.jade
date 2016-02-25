@@ -12,8 +12,8 @@ html
     //  addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 
     // Google Fonts
-    link(href='/stylesheets/googlefont_cambo.css', rel='stylesheet', type='text/css')
-    link(href='/stylesheets/googlefont_hind.css', rel='stylesheet', type='text/css')
+    // link(href='/stylesheets/googlefont_cambo.css', rel='stylesheet', type='text/css')
+    // link(href='/stylesheets/googlefont_hind.css', rel='stylesheet', type='text/css')
 
     link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css', type='text/css', media='all')
     link(rel='stylesheet', href='/bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css')
@@ -41,7 +41,7 @@ html
     script(src='/javascripts/scripts.js')
     script(src='/javascripts/menu-function.js')
 
-    if page === 'admission'
+    if page==='admission' || page==='cancel-admission'
       script(src='/javascripts/admission.js')
 
     else if page === 'inventory'

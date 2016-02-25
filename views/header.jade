@@ -21,7 +21,6 @@
             li
               a(href='/')
                 | home
-                span.arrow
               //
                 <ul style="display: none;" class="sub_menu">
                 <li class="arrow_top"></li>
@@ -30,6 +29,12 @@
             if _.contains(user.permissions,'admin') || _.contains(user.permissions,'opd')
               li
                 a.admission(href='/server/admission') admission
+                ul.sub_menu(style='display: none;')
+                  li.arrow_top
+                  li
+                    a(href="/server/admit") Admit Patient
+                  li
+                    a(href="/server/cancel/admission") Cancel Admission
             else
               li
                 a(href='#', title='Admitting patients is not allowed on your credentials.') admission
@@ -37,7 +42,6 @@
               if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab') || _.contains(user.permissions,'meds') || _.contains(user.permissions,'pharma')
                 a(href='#')
                   | utilities
-                span.arrow
                 ul.sub_menu(style='display: none;')
                   li.arrow_top
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab')
@@ -57,7 +61,6 @@
             li
               a(href='#')
                 | patient
-                span.arrow
               ul.sub_menu(style='display: none;')
                 li.arrow_top
                 li
@@ -66,7 +69,6 @@
               if _.contains(user.permissions,'admin') || _.contains(user.permissions,'billing')
                 a(href='#')
                   | reports
-                span.arrow
                 ul.sub_menu(style='display: none;')
                   li.arrow_top
                   li
@@ -79,7 +81,6 @@
             li
               a(href='#')
                 | profile
-                span.arrow
               ul.sub_menu(style='display: none;')
                 li.arrow_top
                 li

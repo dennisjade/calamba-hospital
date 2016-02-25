@@ -30,6 +30,8 @@
     var admission = new Admission();
     for (prop in admitObj) {
       if (AdmissionSchema[prop] != null) {
+        if (prop=='patientRef')
+          admitObj[prop] = mongoose.Types.ObjectId(admitObj[prop])
         admission[prop] = admitObj[prop];
       }
     }
@@ -39,6 +41,16 @@
         return callback(err, null)
 
       return callback(null, admission)
+    })
+  }
+
+  module.exports.cancelAdmission = function(req, admitObj, callback){
+    var removeQuery = {}
+    admission.remove(removeQuery, function(err, data){
+      if (err)
+        return callback(err, null)
+
+      return callback(null, data)
     })
   }
 

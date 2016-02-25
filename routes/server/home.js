@@ -3,7 +3,7 @@
   module.exports =  function(app){
 
     showHome = function(req, res) {
-      var json = {error:null}
+      var json = {error:null, page: "Login"}
       if (!req.session.user){
         return res.redirect('/login')
       }else{

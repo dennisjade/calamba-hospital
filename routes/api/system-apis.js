@@ -20,11 +20,13 @@
         if (patientArr && patientArr[1].length>0){
           var patientId = commonHelper.getNumber(patientArr[0])
           var name = patientArr[1].split(',')
+          
           console.log('aaaa', patientArr, name, patientArr[4]=='')
+
           if (name.length>1){
             var lname = name[0].replace('"','').trim()
             var fname = name[1].replace('"','').trim()
-            var mname = patientArr[3]
+            var mname = patientArr[2]
             var bday = patientArr[4]==''? null: moment(patientArr[4]).toString()
             bday = bday=='Invalid date'?null:bday
             var add = patientArr[5].replace('"','')
@@ -42,7 +44,7 @@
             console.log(patientObj);
             Patient.getCreateOrUpdate(req, patientObj, function(err, data){
               if (err)
-                console.log('Error: ', err)
+                console.log('Error creating person: ', err)
               
               cb(null)
             })

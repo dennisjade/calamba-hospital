@@ -7,9 +7,10 @@ block content
         br
         form.form-horizontal.admissionForm
           .form-group
-            label.col-sm-4.control-label(for='fname') Patient Id
+            label.col-sm-4.control-label(for='patientId') Patient Id
             .col-sm-6
-              input#patientId.form-control(type='input', name="patientId", disabled="disabled")
+              span#patientId [NEW]
+              input#pid.form-control(type='hidden', name="pid")
           .form-group
             label.col-sm-4.control-label(for='fname') First Name
             .col-sm-6
@@ -52,9 +53,30 @@ block content
 
 
     #overlay-patient-search(title="Search patient")
-      #row
-        .col-md-3 Patient Name
-        .col-md-7 
-          input#patientName.form-control(type='input')
-        .col-md-2 
-          .btn.btn-default Search
+      ///
+        #row
+          .col-md-3 Patient Name
+          .col-md-7 
+            input#patientName.form-control(type='input')
+          .col-md-2 
+            .btn.btn-default Search
+
+      table#patientSearch.display(cellspacing='0', width='100%')
+        thead
+          tr
+            th First name
+            th Last name
+            th Middle name
+            th Gender
+            th Birthday
+            th Is Admitted
+            th Choose?
+        tfoot
+          tr
+            th First name
+            th Last name
+            th Middle name
+            th Gender
+            th Birthday
+            th Is Admitted
+            th Choose?
