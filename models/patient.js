@@ -109,7 +109,7 @@
     if (!pid )
       return callback('No patient id specified', null)
     
-    var query = {_id:mongoose.Types..ObjectId(pid)}
+    var query = {_id:mongoose.Types.ObjectId(pid)}
     Patient.findOne(query).exec(function(err, data){
       if (err)
         return callback(err, null)
