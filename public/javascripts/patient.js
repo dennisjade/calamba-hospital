@@ -1,8 +1,22 @@
 (function () {
-  var patient = $('#patient').DataTable( {
-        "ajax": "/api/patients/?datatable=true",
+  
+  $('#searchPatient').on( 'keypress', function (e) {
+    if (e.which==13){
+      patientDataTable.draw()
+    }
+  });
+
+  var patientDataTable = $('#patient')
+      .DataTable( {
+        "ajax": {
+          url : "/api/patients/?datatable=true",
+          data: function ( d ) {
+                d.search['value'] = $('#searchPatient').val()
+            }
+        },
         "processing": true,
         "serverSide": true,
+        "searching" : false,
         "columns": [
           { "data": "_id", "visible": false },
           { "data": "fname" },
@@ -33,7 +47,7 @@
               var markup = "<a class='label label-primary editService' refObj='"+JSON.stringify(r)+"' ref='"+r._id+"' href='#'>EDIT</a>&nbsp;";
               
               /*do not allow deletion if patient is admitted*/
-              if (r.isCurrentlyAdmitted=='false')
+              if (!r.isCurrentlyAdmitted)
                   markup = markup + "<a class='label label-danger deleteService' ref='"+r._id+"' href='#'>DELETE</a>"
               return markup;
             }

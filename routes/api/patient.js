@@ -2,8 +2,13 @@
   var Patient = require('../../models/patient')
 
 
-  formatForDatatable = function(data){
-    return {data:data}
+  formatForDatatable = function(req, data, totalRecords){
+    var dataTable = {
+      "recordsTotal": totalRecords,
+      "recordsFiltered": totalRecords, //data.length,
+      "data" : data
+    }
+    return dataTable
   }
 
   module.exports = function(app) {
@@ -13,7 +18,7 @@
       var paginateStart = req.query.start
       var paginateLength = req.query.length
       var searchQuery = req.query.search
-
+      console.log(req.query.search)
       var query = {
         $or: 
           [
@@ -27,25 +32,30 @@
         delete query.isCurrentlyAdmitted
 
       sendResponse = function(data){
-        if (req.query.datatable=='true')
-          json = formatForDatatable(data)
-        else
+        if (req.query.datatable=='true'){
+          /*lets get the total records for paginations*/
+          Patient.getTotalPatiens(req, query, function(err, totalData){
+            json = formatForDatatable(req, data, totalData)
+            console.log(totalData)
+            return res.json(json)
+          })
+        }else{
           json.data = data
-
-        res.json(json)
+          return res.json(json)
+        }
       }
       
       if (searchQuery.value.length==0)
-        sendResponse([])
+        return sendResponse([])
       else{
-        Patient.getPatients(req, query, function(err, data){
+        Patient.getPatients(req, query, paginateStart, paginateLength,  function(err, data){
           if (err){
             json.status = 500
             json.msg  = "Error loading patients: " + JSON.stringify(err)
-            json.data = []
+            data = []
           }
-
-          sendResponse(data)
+          
+          return sendResponse(data)
         })
       }
     }

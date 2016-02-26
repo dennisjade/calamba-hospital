@@ -93,15 +93,28 @@
   }
 
 
-  module.exports.getPatients = function(req, query, callback){
+  module.exports.getPatients = function(req, query, start, limit, callback){
     if (!query || typeof(query)!='object')
       return callback('Wrong query type', null)
     
-    Patient.find(query).exec(function(err, data){
+    start = start? start : 0
+    limit = limit? limit : 0
+    console.log(start, limit)
+    Patient.find(query).skip(start).limit(limit).exec(function(err, data){
       if (err)
         return callback(err, null)
       else
         return callback(null, data)
+    })
+  }
+
+  module.exports.getTotalPatiens = function(req, query, callback){
+    Patient.find(query).count().exec(function(err, totalData){
+      console.log(err,totalData)
+      if (err)
+        return callback(err, null)
+      else
+        return callback(null, totalData)
     })
   }
 

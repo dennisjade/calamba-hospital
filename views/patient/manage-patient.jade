@@ -2,20 +2,13 @@ extends ../layout
 
 block content
   .block-container.banner
-    .admission-form
+    div(style="background-color:#f3f3f3;padding:10px")
       .admission-form-size
+        span(style="padding-bottom:25px")
+          label Search lastname or firstname : &nbsp;
+          input#searchPatient(type="input", name="search")
         table#patient.display(cellspacing='0', width='100%')
           thead
-            tr
-              th id
-              th First name
-              th Last name
-              th Middle name
-              th Gender
-              th Birthday
-              th Admitted?
-              th Choose?
-          tfoot
             tr
               th id
               th First name
