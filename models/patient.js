@@ -142,4 +142,26 @@
     })
   }
 
+  module.exports.updatePatient = function(req, patientObj, callback){
+    if (!query || typeof(query)!='object')
+      return callback('Wrong query type', null)
+
+    for (prop in patientObj) {
+      if (PatientSchema[prop] != null) {
+        patient[prop] = patientObj[prop];
+      }
+    }
+
+    module.exports.getPatient(req, patientObj.pid, function(err, data){
+      if (err) || !patient
+        return callback(err+" or no patient", null)
+
+      Patient.update(patient).exec( function (errUpdate, updated){
+        if (err)
+          return callback(errUpdate, null)
+
+        return callback(null, updated)
+      })
+    })
+  }
 }).call(this);

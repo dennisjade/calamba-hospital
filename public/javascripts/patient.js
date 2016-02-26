@@ -20,6 +20,31 @@
     admissionSearch.dialog( "close" );
   }
 
+  $('#updatePatient').on('click', function (e){
+    successfn = function(res){
+      if (res.status==200){
+        var msg = res.msg
+        $('.serverResponse').addClass('text-success')
+        $('#updatePatient').addClass('disabled')
+        $('#updatePatient').attr("disabled", "disabled")
+        $('#pid').val(res.data.pid)
+        $('#patientId').html(res.data.patientId)
+      }else{
+        var msg = res.msg + "@" + res.data.error
+        $('.serverResponse').addClass('text-danger')
+      }
+      $('.serverResponse').html(msg)
+    }
+    errorfn = function(res){
+    }
+
+    var url  = "/api/patient"
+    var type = "POST"
+    var data = $('.admissionForm').serialize()
+    
+    makeAjax(url, type, data, successfn, errorfn)
+  })
+
   $('#searchPatient').on( 'keypress', function (e) {
     if (e.which==13){
       patientDataTable.draw()
