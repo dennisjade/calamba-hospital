@@ -99,7 +99,6 @@
     
     start = start? start : 0
     limit = limit? limit : 0
-    console.log(start, limit)
     Patient.find(query).skip(start).limit(limit).exec(function(err, data){
       if (err)
         return callback(err, null)
@@ -110,7 +109,6 @@
 
   module.exports.getTotalPatiens = function(req, query, callback){
     Patient.find(query).count().exec(function(err, totalData){
-      console.log(err,totalData)
       if (err)
         return callback(err, null)
       else
@@ -124,6 +122,19 @@
     
     var query = {_id:mongoose.Types.ObjectId(pid)}
     Patient.findOne(query).exec(function(err, data){
+      if (err)
+        return callback(err, null)
+      else
+        return callback(null, data)
+    })
+  }
+
+  module.exports.deletePatient = function(req, pid, callback){
+    if (!pid)
+      return callback('No patient id specified', null)
+
+    var deleteQuery = {_id:mongoose.Types.ObjectId(pid)}
+    Patient.remove(deleteQuery).exec(function(err, data){
       if (err)
         return callback(err, null)
       else

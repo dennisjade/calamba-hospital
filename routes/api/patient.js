@@ -18,7 +18,6 @@
       var paginateStart = req.query.start
       var paginateLength = req.query.length
       var searchQuery = req.query.search
-      console.log(req.query.search)
       var query = {
         $or: 
           [
@@ -36,7 +35,6 @@
           /*lets get the total records for paginations*/
           Patient.getTotalPatiens(req, query, function(err, totalData){
             json = formatForDatatable(req, data, totalData)
-            console.log(totalData)
             return res.json(json)
           })
         }else{
@@ -60,7 +58,22 @@
       }
     }
 
+    deletePatient = function(req, res){
+      var json = {status:200, msg:'Success'}
+
+      Patient.deletePatient(req, req.params.pid, function(err, data){
+        if (err){
+          json.status = 500
+          json.msg  = "Error deleting patient: " + JSON.stringify(err)
+          data = []
+        }
+
+        return res.json(json)
+      })
+    }
+
     app.get('/api/patients', getPatients)
+    app.delete('/api/patient/:pid', deletePatient)
 
   }
 }).call(this)
