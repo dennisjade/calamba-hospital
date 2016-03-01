@@ -31,7 +31,7 @@
     "ajax": "/api/medicines/?datatable=true",
     "columns": [
       { "data": "_id", "visible": false },
-      { "data": "updateDate" },
+      { "data": "addedDate" },
       { "data": "medicineName" },
       { "data": "medicineQuantity" },
       { "data": "medicineDesc" },
@@ -42,7 +42,7 @@
       {
         "targets": 1,
         "render": function(d, t, r) {
-          return "<span title='"+moment(r.updateDate).format('LT')+"'>"+moment(r.updateDate).format('ll')+  "</span>";
+          return "<span title='"+moment(r.addedDate).format('LT')+"'>"+moment(r.addedDate).format('ll')+  "</span>";
         }
       },
       {

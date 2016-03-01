@@ -19,6 +19,7 @@
         medicineName: req.body.medicineName,
         medicineQuantity: req.body.medicineQuantity,
         medicineDesc: req.body.medicineDesc,
+        updatedBy: req.session.user._id,
       };
       Medicine.saveMedicine(medicineFields, function(err, createdMedicine) {
         if(err) return res.status(500).send(err);
@@ -28,7 +29,6 @@
 
     updateMedicine = function(req, res) {
 
-      // Create promise to defer update Meds
       var medicineID = req.params.medicineID;
 
       MedicineMeta.createAction(medicineID, req.body, function(err, response) {
@@ -43,25 +43,6 @@
         }
       });
 
-      // var updateMedPromise = new Promise(function(resolve, reject) {
-      //   Medicine.updateMedicine(medicineID, req.body, function(err, updatedObj) {
-      //     if(err) {
-      //       reject(Error(err));
-      //     } else {
-      //       resolve(updatedObj);
-      //     }
-      //   });
-      // });
-      //
-      // updateMedPromise().then(function(updatedObj) {
-      //   // Create medicine metaaction during update
-      //   MedicineMeta.createAction(medicineID, updatedObj, function(err, response) {
-      //     if(err) return res.status(500).send(err);
-      //     res.status(200).json(updatedObj);
-      //   });
-      // }).catch(function(err) {
-      //   res.status(500).send(err);
-      // });
     }
 
     removeMedicine = function(req, res) {

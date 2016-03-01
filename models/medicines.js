@@ -20,8 +20,15 @@
       default: false
     },
     updatedBy: {
-      type: String,
-      trim: true
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      index: true
+    },
+    addedDate: {
+      type: Date,
+      default: function() {
+        return new Date()
+      }
     },
     updateDate:{
       type: Date,
@@ -70,6 +77,8 @@
       Medicine.findOne({_id: _id}, function(err, medicineObj) {
         if(err) return callback(err, null);
         if(!medicineObj) return callback("Item `" + _id + "` not found", null);
+
+        medicineObj.updateDate = new Date();
 
         for(prop in updateObj) {
           if(MedicineSchema[prop] != null) {
