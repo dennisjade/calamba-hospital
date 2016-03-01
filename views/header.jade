@@ -26,18 +26,22 @@
                 <li class="arrow_top"></li>
                 <li><a class="subCurrent" href="http://www.freshdesignweb.com">Home Service</a></li>
                 </ul>
-            if _.contains(user.permissions,'admin') || _.contains(user.permissions,'opd')
-              li
-                a.admission(href='/server/admission') admission
-                ul.sub_menu(style='display: none;')
-                  li.arrow_top
-                  li
-                    a(href="/server/admit") Admit Patient
-                  li
-                    a(href="/server/cancel/admission") Cancel Admission
-            else
-              li
-                a(href='#', title='Admitting patients is not allowed on your credentials.') admission
+            li
+              a.admission(href='/server/admission') departments
+              ul.sub_menu(style='display: none;')
+                li.arrow_top
+                li
+                  a(href="#") Admission
+                li 
+                  a(href="#") ER
+                li
+                  a(href="#") OPD
+                li
+                  a(href="#") Pharmacy
+                li
+                  a(href="#") Supplies
+                li
+                  a(href="#") Laboratory
             li
               if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab') || _.contains(user.permissions,'meds') || _.contains(user.permissions,'pharma')
                 a(href='#')
@@ -46,12 +50,13 @@
                   li.arrow_top
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'lab')
                     li
-                      a(href='#') laboratory
+                      a(href='#') manage supplies
                   if _.contains(user.permissions,'admin') || _.contains(user.permissions,'pharma')
                     li
-                      a(href='/utilities/pharmacy') pharmacy
-                  li
-                    a(href='/utilities/services') services
+                      a(href='/utilities/pharmacy') manage pharmacy
+                  if _.contains(user.permissions,'admin') || _.contains(user.permissions,'services')
+                    li
+                      a(href='/utilities/services') manage services
               else
                 a(href='#', title='Your credentials does not permit you to manage these utilities.')
                   | utilities

@@ -153,7 +153,7 @@
     }
 
     module.exports.getPatient(req, patientObj.pid, function(err, data){
-      if (err) || !patient
+      if (err || !patient)
         return callback(err+" or no patient", null)
 
       Patient.update(patient).exec( function (errUpdate, updated){
