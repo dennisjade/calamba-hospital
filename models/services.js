@@ -20,8 +20,15 @@
       default: false
     },
     updatedBy: {
-      type: String,
-      trim: true
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      index: true
+    },
+    addedDate: {
+      type: Date,
+      default: function() {
+        return new Date()
+      }
     },
     updateDate:{
       type: Date,
@@ -59,7 +66,7 @@
     },
 
     getService : function(_id, callback) {
-      Service.find({_id: _id}, function(err, serviceObj) {
+      Service.findOne({_id: _id}, function(err, serviceObj) {
         if(err) return callback(err, null);
         if(!serviceObj) return callback("Item `" + _id + "` not found", null);
         callback(null, serviceObj);
@@ -70,6 +77,8 @@
       Service.findOne({_id: _id}, function(err, serviceObj) {
         if(err) return callback(err, null);
         if(!serviceObj) return callback("Item `" + _id + "` not found", null);
+
+        serviceObj.updateDate = new Date();
 
         for(prop in updateObj) {
           if(ServiceSchema[prop] != null) {

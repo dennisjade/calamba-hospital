@@ -1,5 +1,7 @@
 (function() {
-  var Service = require('../../models/services')
+  var Service = require('../../models/services'),
+      mongoose = require('mongoose'),
+      ServiceMeta = require('../../models/services-meta-actions');
 
   module.exports = function(app) {
 
@@ -17,7 +19,9 @@
         serviceName: req.body.serviceName,
         servicePrice: req.body.servicePrice,
         serviceDesc: req.body.serviceDesc,
+        updatedBy: mongoose.Types.ObjectId(req.session.user._id),
       };
+
       Service.saveService(serviceFields, function(err, createdService) {
         if(err) return res.status(500).send(err);
         res.status(201).json(createdService);
@@ -25,10 +29,22 @@
     }
 
     updateService = function(req, res) {
-      Service.updateService(req.params.serviceID, req.body, function(err, updatedObj) {
+
+      var serviceID = req.params.serviceID;
+
+      ServiceMeta.createAction(serviceID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
-        res.status(200).json(updatedObj)
+        if(response.affected > 0) {
+          req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
+          Service.updateService(req.params.serviceID, req.body, function(err, updatedObj) {
+            if(err) return res.status(500).send(err);
+            res.status(200).json(updatedObj)
+          });
+        } else {
+          res.status(200).json({status: 200, message: "Service record still up to date"});
+        }
       });
+
     }
 
     removeService = function(req, res) {

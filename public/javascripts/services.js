@@ -23,7 +23,7 @@
     "ajax": "/api/services/?datatable=true",
     "columns": [
       { "data": "_id", "visible": false },
-      { "data": "updateDate" },
+      { "data": "addedDate" },
       { "data": "serviceName" },
       { "data": "servicePrice" },
       { "data": "serviceDesc" },
@@ -34,7 +34,7 @@
       {
         "targets": 1,
         "render": function(d, t, r) {
-          return "<span title='"+moment(r.updateDate).format('LT')+"'>"+moment(r.updateDate).format('ll')+  "</span>";
+          return "<span title='"+moment(r.addedDate).format('LT')+"'>"+moment(r.addedDate).format('ll')+  "</span>";
         }
       },
       { "targets": 2, "width": "30%" },
