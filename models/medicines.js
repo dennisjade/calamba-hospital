@@ -78,8 +78,6 @@
         if(err) return callback(err, null);
         if(!medicineObj) return callback("Item `" + _id + "` not found", null);
 
-        medicineObj.updateDate = new Date();
-
         for(prop in updateObj) {
           if(MedicineSchema[prop] != null) {
             medicineObj[prop] = updateObj[prop];
