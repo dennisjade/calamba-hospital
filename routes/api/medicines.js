@@ -20,6 +20,7 @@
         medicineName: req.body.medicineName,
         medicineQuantity: req.body.medicineQuantity,
         medicineDesc: req.body.medicineDesc,
+        medicineSource: req.body.medicineSource,
         updatedBy: mongoose.Types.ObjectId(req.session.user._id),
       };
       Medicine.saveMedicine(medicineFields, function(err, createdMedicine) {
@@ -34,15 +35,11 @@
 
       MedicineMeta.createAction(medicineID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
-        if(response.affected > 0) {
-          req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
-          Medicine.updateMedicine(medicineID, req.body, function(errUpdate, updatedObj) {
-            if(err) return res.status(500).send(errUpdate);
-            res.status(200).json(updatedObj);
-          });
-        } else {
-          res.status(200).json({status: 200, message: "Medicine record still up to date"});
-        }
+        req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
+        Medicine.updateMedicine(medicineID, req.body, function(errUpdate, updatedObj) {
+          if(err) return res.status(500).send(errUpdate);
+          res.status(200).json(updatedObj);
+        });
       });
 
     }
