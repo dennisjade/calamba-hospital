@@ -16,41 +16,56 @@ block content
               th ID
               th Date
               th Medicine Name
+              th Source
               th Quantity
               th Description
               th.dt-center Actions
 
     #overlay-edit-medicine-dialog(title="Edit Medicine")
       form
+        input#medicineQuantity.form-control(type='hidden', name="medicineQuantity")
         input#medicineID(type="hidden")
         .row(style="margin-bottom: 10px")
-          .col-md-3 Name
-          .col-md-9
+          .col-md-2 Name
+          .col-md-10
             input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
         .row(style="margin-bottom: 10px")
-          .col-md-3 Add Quantity
-          .col-md-6
-            .in_stock
-              |Item in Stock --&nbsp;
-              span 0
-          .col-md-3
-            input#medicineQuantity.form-control(type='number', name="medicineQuantity", min="0")
+          .col-md-2 Source
+          .col-md-10
+            select#medicineSource.form-control(name="medicineSource")
+              option(value="") Please select..
+              each source in medSources
+                option(value="#{source.value}") #{source.label}
         .row
-          .col-md-3 Description
-          .col-md-9
+          .col-md-2 Description
+          .col-md-10
             textarea#medicineDesc.form-control(name="medicineDesc", placeholder="Medicine Description")
 
     #overlay-add-medicine-dialog(title="Add New Medicine")
       form
         .row(style="margin-bottom: 10px")
-          .col-md-3 Name
-          .col-md-9
+          .col-md-2 Name
+          .col-md-10
             input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
         .row(style="margin-bottom: 10px")
-          .col-md-3 Quantity
-          .col-md-3
-            input#medicineQuantity.form-control(type='number', name="medicineQuantity", value="1", min="1")
+          .col-md-2 Quantity
+          .col-md-4
+            input#medicineQuantity.form-control(type='number', name="medicineQuantity", value="0", min="0")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Source
+          .col-md-10
+            select#medicineSource.form-control(name="medicineSource")
+              option(value="") Please select..
+              each source in medSources
+                option(value="#{source.value}") #{source.label}
         .row
-          .col-md-3 Description
-          .col-md-9
+          .col-md-2 Description
+          .col-md-10
             textarea#medicineDesc.form-control(name="medicineDesc", placeholder="Medicine Description")
+
+    #overlay-add-medicine-quantity-dialog(title="Add Quantity")
+      form
+        input#medicineID(type="hidden")
+        .row
+          .col-md-12
+            input#medicineQuantity.form-control.num_font(type='number', name="medicineQuantity", value="0", min="0")
