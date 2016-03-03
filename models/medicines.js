@@ -1,4 +1,5 @@
 (function() {
+
   var mongoose  = require('mongoose')
   var modelHelper = require('../helpers/model')
 
@@ -13,6 +14,10 @@
     },
     medicineDesc: {
       type : String,
+      trim: true
+    },
+    medicineSource: {
+      type: String,
       trim: true
     },
     deleted: {
