@@ -1,5 +1,12 @@
 (function() {
 
+  var medSources = [
+    { label: 'Hospital Budget', value: 'HOSPITAL_BUDGET' },
+    { label: 'Consignment', value: 'CONSIGNMENT' },
+    { label: 'Public Pharmacy', value: 'PUBLIC_PHARMA' },
+    { label: 'Map', value: 'MAP' }
+  ];
+
   /**
   * Exports for handling utilities routes
   */
@@ -10,9 +17,11 @@
     },
 
     pharmacy = function(req, res) {
-      var json = {};
-      json.user = req.session.user;
-      json.page = 'pharmacy';
+      var json = {
+        user : req.session.user,
+        medSources: medSources,
+        page : 'pharmacy',
+      };
       res.render('utilities/pharmacy.jade', json);
     },
 
