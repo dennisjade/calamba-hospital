@@ -1291,12 +1291,12 @@ span.menu img {
 .body-form {
   background-color: #f3f3f3;
   border: 1px solid #ccc;
-  left: 33%;
+  left: 29%;
   margin-left: -15em;
   margin-top: -9em;
   position: fixed;
   top: 33%;
-  width: 60em;
+  width: 70em;
   padding: 20px;
 }
 
@@ -1313,8 +1313,10 @@ span.menu img {
 
 .in_stock {
   background: #1abc9c none repeat scroll 0 0;
+  border: 1px solid #11b393;
   color: #fff;
-  padding: 4px 0;
+  font-size: 18px;
+  padding: 3px 0;
   text-align: center;
 }
 
@@ -1326,3 +1328,14 @@ span.menu img {
   font-size:0.9em !important;
 }
 
+.action_style {
+  font-weight: 200;
+  border-radius: 0;
+  padding: 4px 8px;
+}
+
+#medicineItems tr td {
+  cursor: pointer;
+}
+
+.num_font { font-size: 1.5em !important; }
