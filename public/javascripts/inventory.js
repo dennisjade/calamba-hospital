@@ -126,7 +126,7 @@
   }
 
   // Initialize dialogs
-  var editDialog = initDialog("#overlay-edit-dialog", editBtnActions);
-  var addDialog = initDialog("#overlay-add-dialog", addBtnActions);
+  var editDialog = initDialog("#overlay-edit-dialog", editBtnActions, 700);
+  var addDialog = initDialog("#overlay-add-dialog", addBtnActions, 700);
 
 }).call(this)

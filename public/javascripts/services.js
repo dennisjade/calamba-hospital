@@ -126,7 +126,7 @@
   }
 
   // Initialize dialogs
-  var editServiceDialog = initDialog("#overlay-edit-service-dialog", editBtnActions);
-  var addServiceDialog = initDialog("#overlay-add-service-dialog", addBtnActions);
+  var editServiceDialog = initDialog("#overlay-edit-service-dialog", editBtnActions, 700);
+  var addServiceDialog = initDialog("#overlay-add-service-dialog", addBtnActions, 700);
 
 }).call(this);

@@ -4,11 +4,11 @@
     return $.ajax({ url: url, type: type, data: data, dataType: 'JSON' });
   }
 
-  initDialog = function(_id, btnActions) {
+  initDialog = function(_id, btnActions, width) {
     return $(_id).dialog({
       autoOpen: false,
       resizable: false,
-      width: 700,
+      width: width,
       height: "auto",
       modal: true,
       show: { effect: "slideDown", duration: 100 },
