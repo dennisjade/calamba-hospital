@@ -17,7 +17,7 @@ http://www.freshdesignweb.com/drop-down-responsive-menu-with-css3-and-jquery.htm
   position:relative;
 }
 #fdw nav ul li a:link, #fdw nav ul li a:visited {
-  color:#444;
+  color:#fff;
   font:normal 15px 'Yanone Kaffeesatz', sans-serif;
   text-transform:uppercase;
   display:inline-block;

@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    div(style="background-color:#f3f3f3;padding:10px")
+      .admission-form-size
+        span(style="padding-bottom:25px")
+          label Search lastname or firstname : &nbsp;
+          input#searchPatient(type="input", name="search")
+        table#patient.display(cellspacing='0', width='100%')
+          thead
+            tr
+              th id
+              th Patient ID
+              th First name
+              th Last name
+              th Middle name
+              th Gender
+              th Birthday
+              th Admitted?
+              th Choose?
+
+  #overlay-patient-update(title="Update patient")
+    .admission-form-size
+      br
+      form.form-horizontal.admissionForm
+        .form-group
+          label.col-sm-4.control-label(for='patientId') Patient Id
+          .col-sm-6
+            span#patientId [NEW]
+            input#pid.form-control(type='hidden', name="pid")
+        .form-group
+          label.col-sm-4.control-label(for='fname') First Name
+          .col-sm-6
+            input#fname.form-control(type='input', name="fname", placeholder='patient first name')
+        .form-group
+          label.col-sm-4.control-label(for='mname') Middle Name
+          .col-sm-6
+            input#mname.form-control(type='input', name="mname", placeholder='patient middle name')
+        .form-group
+          label.col-sm-4.control-label(for='lname') Last Name
+          .col-sm-6
+            input#lname.form-control(type='input', name="lname", placeholder='patient last name')
+        .form-group
+          label.col-sm-4.control-label(for='gender') Gender
+          .col-sm-6
+              label.radio-inline
+                input#genderMale(type='radio', name='gender', value='male')
+                |  Male
+              label.radio-inline
+                input#genderFemale(type='radio', name='gender', value='female')
+                |  Female
+        .form-group
+          label.col-sm-4.control-label(for='bday') Birthday
+          .col-sm-6
+            input#datetimepickerBday.form-control(type='text', name="bday", placeholder="mm/dd/yyyy")
+        .form-group
+          label.col-sm-4.control-label(for='address') Address
+          .col-sm-6
+            textarea#address.form-control(name="address", placeholder='patient address')
+        .form-group
+          .col-sm-offset-4.col-sm-2
+            button.btn.btn-primary#updatePatient(type='button') Update Patient Info
+          .col-sm-6.serverResponse

@@ -12,10 +12,11 @@
       var path = req.query.path || './fixtures/patient_data.csv'
       var data = fs.readFileSync(path).toString().split("\n");
 
+      res.json({status:200, msg:"Process patient record around #{patientArr.length}"})
+
       async.eachSeries(data, function(record, cb){
         console.log(record)
         var patientArr = record.split(':')
-        res.json({status:200, msg:"Process patient record around #{patientArr.length}"})
 
         if (patientArr && patientArr[1].length>0){
           var patientId = commonHelper.getNumber(patientArr[0])
