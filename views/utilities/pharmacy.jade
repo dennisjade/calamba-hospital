@@ -16,8 +16,9 @@ block content
               th ID
               th Date
               th Medicine Name
+              th.dt-center Price
+              th.dt-center Quantity
               th Source
-              th Quantity
               th Description
               th.dt-center Actions
 
@@ -29,6 +30,10 @@ block content
           .col-md-2 Name
           .col-md-10
             input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Price
+          .col-md-4
+            input#medicinePrice.form-control(type='number', name="medicinePrice", value="0", min="0")
         .row(style="margin-bottom: 10px")
           .col-md-2 Source
           .col-md-10
@@ -47,6 +52,10 @@ block content
           .col-md-2 Name
           .col-md-10
             input#medicineName.form-control(type='text', name="medicineName", placeholder="Medicine Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Price
+          .col-md-4
+            input#medicinePrice.form-control(type='number', name="medicinePrice", value="0", min="0")
         .row(style="margin-bottom: 10px")
           .col-md-2 Quantity
           .col-md-4
