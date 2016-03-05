@@ -18,7 +18,7 @@
       var serviceFields = {
         serviceName: req.body.serviceName,
         servicePrice: req.body.servicePrice,
-        serviceDesc: req.body.serviceDesc,
+        serviceDesc: escape(req.body.serviceDesc),
         updatedBy: mongoose.Types.ObjectId(req.session.user._id),
       };
 
@@ -34,15 +34,12 @@
 
       ServiceMeta.createAction(serviceID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
-        if(response.affected > 0) {
-          req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
-          Service.updateService(req.params.serviceID, req.body, function(err, updatedObj) {
-            if(err) return res.status(500).send(err);
-            res.status(200).json(updatedObj)
-          });
-        } else {
-          res.status(200).json({status: 200, message: "Service record still up to date"});
-        }
+        req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
+        req.body.serviceDesc = escape(req.body.serviceDesc);
+        Service.updateService(req.params.serviceID, req.body, function(err, updatedObj) {
+          if(err) return res.status(500).send(err);
+          res.status(200).json(updatedObj)
+        });
       });
 
     }

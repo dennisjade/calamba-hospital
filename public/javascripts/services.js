@@ -5,7 +5,7 @@
     $("#overlay-edit-service-dialog #serviceID").val(data._id);
     $("#overlay-edit-service-dialog #serviceName").val(data.serviceName);
     $("#overlay-edit-service-dialog #servicePrice").val(data.servicePrice);
-    $("#overlay-edit-service-dialog #serviceDesc").val(data.serviceDesc);
+    $("#overlay-edit-service-dialog #serviceDesc").val(unescape(data.serviceDesc));
   }
 
   validateFields = function($frm) {
@@ -42,7 +42,7 @@
       {
         "targets": 4,
         "render": function(d, t, r) {
-          return "<div title='"+r.serviceDesc+"' class='truncate'>"+r.serviceDesc+"</div>"
+          return "<div title='"+unescape(r.serviceDesc)+"' class='truncate'>"+unescape(r.serviceDesc)+"</div>"
         }
       },
       {

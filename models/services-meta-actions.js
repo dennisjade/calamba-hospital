@@ -37,7 +37,7 @@
   module.exports = {
 
     createAction : function(serviceID, newObj, callback) {
-      var fields = ['serviceName', 'servicePrice', 'serviceDesc'],
+      var fields = ['serviceName', 'servicePrice'],
           retval = {affected : 0};
 
       Services.getService(serviceID, function(err, oldObj) {
