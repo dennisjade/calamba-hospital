@@ -18,9 +18,10 @@
     createMedicine = function(req, res) {
       var medicineFields = {
         medicineName: req.body.medicineName,
+        medicinePrice: req.body.medicinePrice,
         medicineQuantity: req.body.medicineQuantity,
-        medicineDesc: req.body.medicineDesc,
         medicineSource: req.body.medicineSource,
+        medicineDesc: escape(req.body.medicineDesc),
         updatedBy: mongoose.Types.ObjectId(req.session.user._id),
       };
       Medicine.saveMedicine(medicineFields, function(err, createdMedicine) {
@@ -36,6 +37,7 @@
       MedicineMeta.createAction(medicineID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
         req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
+        req.body.medicineDesc = escape(req.body.medicineDesc);
         Medicine.updateMedicine(medicineID, req.body, function(errUpdate, updatedObj) {
           if(err) return res.status(500).send(errUpdate);
           res.status(200).json(updatedObj);
