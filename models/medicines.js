@@ -12,6 +12,9 @@
     medicineQuantity: {
       type : Number
     },
+    medicinePrice: {
+      type : Number
+    },
     medicineDesc: {
       type : String,
       trim: true
@@ -88,7 +91,8 @@
             medicineObj[prop] = updateObj[prop];
           }
         }
-
+        
+        medicineObj.updateDate = new Date();
         medicineObj.save(function(err) {
           if(err) return callback(err, null);
           callback(null, medicineObj);

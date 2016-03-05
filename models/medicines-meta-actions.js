@@ -37,7 +37,7 @@
   module.exports = {
 
     createAction : function(medicineID, newObj, callback) {
-      var fields = ['medicineName', 'medicineQuantity', 'medicineSource'],
+      var fields = ['medicineName', 'medicinePrice', 'medicineQuantity', 'medicineSource'],
           retval = {affected : 0};
 
       Medicine.getMedicine(medicineID, function(err, oldObj) {
