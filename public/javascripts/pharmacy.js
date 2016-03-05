@@ -17,10 +17,11 @@
     $(dialogID).prev('.ui-dialog-titlebar').find('span').text('Edit Medicine - ( ' + data.medicineName+ ' )');
     $(dialogID + " #medicineID").val(data._id);
     $(dialogID + " #medicineName").val(data.medicineName);
+    $(dialogID + " #medicinePrice").val(data.medicinePrice);
     $(dialogID + " #medicineSource").val(data.medicineSource);
     $(dialogID + " #medicineQuantity").val(0);
     $(dialogID + " .in_stock span").text(data.medicineQuantity);
-    $(dialogID + " #medicineDesc").val(data.medicineDesc);
+    $(dialogID + " #medicineDesc").val(unescape(data.medicineDesc));
   };
 
   // Form validation during create and edit medicines
@@ -54,8 +55,9 @@
       { "data": "_id", "visible": false },
       { "data": "addedDate" },
       { "data": "medicineName" },
-      { "data": "medicineSource" },
+      { "data": "medicinePrice" },
       { "data": "medicineQuantity" },
+      { "data": "medicineSource" },
       { "data": "medicineDesc" },
       { "data": "Actions" }
     ],
@@ -64,33 +66,34 @@
       {
         "targets": 1,
         "render": function(d, t, r) {
-          return "<span title='"+moment(r.addedDate).format('LT')+"'>"+moment(r.addedDate).format('ll')+  "</span>";
+          return "<span title='"+moment(r.addedDate).format('LT')+"'>"+moment(r.addedDate).format('L')+  "</span>";
         }
       },
       {
         "targets": 2,
-        "width": "20%",
         "render": function(d, t, r) {
-          return "<div style='width: 255px' title='"+r.medicineName+"' class='truncate'>"+r.medicineName+"</div>"
+          return "<div title='"+r.medicineName+"' class='truncate'>"+r.medicineName+"</div>"
         }
       },
-      {
-        "targets": 3,
-        "render": function(d, t, r) {
-          return "<div style='width: 200px' title='"+medSources[r.medicineSource]+"' class='truncate'>"+medSources[r.medicineSource]+"</div>"
-        }
-      },
+      { "targets": 3, "className": "dt-center" },
       { "targets": 4, "className": "dt-center" },
       {
         "targets": 5,
         "render": function(d, t, r) {
-          return (!r.medicineDesc ? "N/A" : "<div title='"+r.medicineDesc+"' class='truncate'>"+r.medicineDesc+"</div>")
+          return "<div style='width: 150px' title='"+medSources[r.medicineSource]+"' class='truncate'>"+medSources[r.medicineSource]+"</div>"
         }
       },
       {
         "targets": 6,
+        "render": function(d, t, r) {
+          return (!r.medicineDesc ? "N/A" : "<div title='"+unescape(r.medicineDesc)+"' class='truncate'>"+unescape(r.medicineDesc)+"</div>")
+        }
+      },
+      {
+        "targets": 7,
         "className": "dt-center",
         "render": function(d, t, r) {
+          r.medicineDesc = escape(r.medicineDesc);
           var markup = "<a class='hide action_style label label-primary editMedicine' refObj='"+JSON.stringify(r)+"' ref='"+r._id+"' href='#'>EDIT</a>" +
                        "<a title='Add Quantity' class='action_style label label-primary addQuantity' refObj='"+JSON.stringify(r)+"' ref='"+r._id+"' href='#'>ADD</a>&nbsp;" +
                        "<a title='Remove item' class='action_style label label-danger deleteMedicine' ref='"+r._id+"' href='#'>DELETE</a>"
