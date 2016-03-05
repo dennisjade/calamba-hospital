@@ -37,7 +37,8 @@
       MedicineMeta.createAction(medicineID, req.body, function(err, response) {
         if(err) return res.status(500).send(err);
         req.body.updatedBy = mongoose.Types.ObjectId(req.session.user._id);
-        req.body.medicineDesc = escape(req.body.medicineDesc);
+        // Prevent desc from overwrite during update
+        if(req.body.medicineDesc) req.body.medicineDesc = escape(req.body.medicineDesc);
         Medicine.updateMedicine(medicineID, req.body, function(errUpdate, updatedObj) {
           if(err) return res.status(500).send(errUpdate);
           res.status(200).json(updatedObj);
