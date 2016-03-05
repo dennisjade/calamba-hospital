@@ -93,7 +93,6 @@
         "targets": 7,
         "className": "dt-center",
         "render": function(d, t, r) {
-          r.medicineDesc = escape(r.medicineDesc);
           var markup = "<a class='hide action_style label label-primary editMedicine' refObj='"+JSON.stringify(r)+"' ref='"+r._id+"' href='#'>EDIT</a>" +
                        "<a title='Add Quantity' class='action_style label label-primary addQuantity' refObj='"+JSON.stringify(r)+"' ref='"+r._id+"' href='#'>ADD</a>&nbsp;" +
                        "<a title='Remove item' class='action_style label label-danger deleteMedicine' ref='"+r._id+"' href='#'>DELETE</a>"
