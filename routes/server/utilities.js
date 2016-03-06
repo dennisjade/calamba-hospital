@@ -12,8 +12,12 @@
   */
   module.exports = function(app) {
 
-    laboratory = function(req, res) {
-      // serve laboratory route
+    supplies = function(req, res) {
+      var json = {
+        user : req.session.user,
+        page : 'supplies',
+      };
+      res.render('utilities/supplies.jade', json);
     },
 
     pharmacy = function(req, res) {
@@ -26,13 +30,15 @@
     },
 
     services = function(req, res) {
-      var json = {};
-      json.user = req.session.user;
-      json.page = 'services';
+      var json = {
+        user : req.session.user,
+        page : 'services',
+      };
       res.render('utilities/services.jade', json);
     }
 
     // Refer route map
+    app.get('/utilities/supplies', supplies);
     app.get('/utilities/services', services);
     app.get('/utilities/pharmacy', pharmacy);
   }
