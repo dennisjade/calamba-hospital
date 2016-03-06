@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .block-container.banner
+    .body-form
+      .body-form-size
+        .page-controls.pull-right
+          button.btn-info.btn#addService(type="button")
+            span.glyphicon.glyphicon-plus(aria-hidden="true")
+            |&nbsp;Add Supply
+        h1.page-label #{page.charAt(0).toUpperCase() + page.slice(1)}
+        br

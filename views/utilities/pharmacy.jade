@@ -8,7 +8,7 @@ block content
           button.btn-info.btn#addMedicine(type="button")
             span.glyphicon.glyphicon-plus(aria-hidden="true")
             |&nbsp;Add Medicine
-        h1.page-label Pharmacy
+        h1.page-label #{page.charAt(0).toUpperCase() + page.slice(1)}
         br
         table#medicineItems.stripe.row-border.hover
           thead
