@@ -7,7 +7,7 @@
 
   //Database
   config.getDB = function() {
-    return props.db || 'mongodb://localhost:22222/calamba';
+    return props.db || 'mongodb://localhost:27017/calamba';
   };
 
 }).call(this);

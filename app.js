@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser')
 var MongoStore = require('connect-mongo')(session);
+var config = require('./config')
 var app = express();
 
 // view engine setup
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var sessionOptions = {
-  url: 'mongodb://localhost:22222/calamba'
+  url: config.getDB()
 }
 app.use(session({
     secret: 'cala3ba',
