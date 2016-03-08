@@ -97,10 +97,25 @@
     }
   })
 
-  var patient = $('#patientSearch').DataTable( {
-        "ajax": "/api/patients/?datatable=true&admitted=false",
+  $('#searchPatient').on( 'keypress', function (e) {
+    if (e.which==13){
+      patientDataTable.draw()
+    }
+  });
+  
+  var patientDataTable = $('#patientSearch').DataTable( {
+        "ajax": {
+          url : "/api/patients/?datatable=true",
+          data: function ( d ) {
+                d.search['fname'] = $('input[name=fname]').val();
+                d.search['lname'] = $('input[name=lname]').val()
+                d.search['mname'] = $('input[name=mname]').val()
+                d.search['hospitalNumber'] = $('input[name=hospitalNumber]').val()
+            }
+        },
         "processing": true,
         "serverSide": true,
+        "searching" : false,
         "columns": [
           { "data": "_id", "visible": false },
           { "data": "fname" },

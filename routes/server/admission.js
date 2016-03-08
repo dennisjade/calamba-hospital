@@ -1,7 +1,7 @@
 (function() {
 
   module.exports =  function(app){
-    admit = function(req, res){
+    admission = function(req, res){
       var json = {}
       json.user =req.session.user
       json.page = 'admission'
@@ -15,7 +15,7 @@
       res.render('admission/cancel-admit.jade', json)
     }
 
-    app.get('/server/admit', admit)
+    app.get('/server/admission', admission)
     app.get('/server/cancel/admission', cancelAdmission)
   }
 

@@ -3,7 +3,7 @@
   var modelHelper = require('../helpers/model')
 
   var PatientSchema = {
-    patientId :{
+    hospitalId :{
       type: Number,
       index:true,
       unique: true
@@ -57,7 +57,7 @@
 
 
   module.exports.getCreateOrUpdate = function(req, patientObj, callback){
-    var query = {patientId:patientObj.patientId}
+    var query = {hospitalId:patientObj.hospitalId}
     Patient.findOne(query).exec(function(err, data){
       if (err)
         return callback(err, null)

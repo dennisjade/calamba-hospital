@@ -2,8 +2,37 @@ extends ../layout
 
 block content
   .block-container.banner
-    .admission-form
+    div(style="background-color:#f3f3f3;padding:10px")
       .admission-form-size
+        span(style="padding-bottom:25px")
+          label Search patient  by the following : &nbsp;
+          .container-fluid
+            .row
+              .col-sm-2
+                input(type="input", name="fname", placeholder="first name")
+              .col-sm-2
+                input(type="input", name="lname", placeholder="last name")
+              .col-sm-2
+                input(type="input", name="mname", placeholder="middle name")
+              .col-sm-2
+                input(type="input", name="hospitalNumber", placeholder="hospital #")
+              .col-sm-2
+                input#searchPatient.btn.btn-primary.btn-sm(type="button", value="Search")
+        hr
+        table#patientSearch.display(cellspacing='0', width='100%')
+          thead
+            tr
+              th id
+              th Patient ID
+              th First name
+              th Last name
+              th Middle name
+              th Gender
+              th Birthday
+              th Admitted?
+              th Choose?
+
+      .admission-form-size.hidden
         br
         form.form-horizontal.admissionForm
           .form-group
