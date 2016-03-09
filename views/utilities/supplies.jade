@@ -5,8 +5,61 @@ block content
     .body-form
       .body-form-size
         .page-controls.pull-right
-          button.btn-info.btn#addService(type="button")
+          button.btn-info.btn#addSupply(type="button")
             span.glyphicon.glyphicon-plus(aria-hidden="true")
             |&nbsp;Add Supply
         h1.page-label #{page.charAt(0).toUpperCase() + page.slice(1)}
         br
+        table#supplyItems.stripe.row-border.hover
+          thead
+            tr
+              th ID
+              th Date
+              th Supply Name
+              th.dt-center Price
+              th.dt-center Quantity
+              th Description
+              th.dt-center Actions
+
+    #overlay-edit-supply-dialog(title="Edit Supply")
+      form
+        input#supplyQuantity.form-control(type='hidden', name="supplyQuantity")
+        input#supplyID(type="hidden")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Name
+          .col-md-10
+            input#supplyName.form-control(type='text', name="supplyName", placeholder="Supply Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Price
+          .col-md-4
+            input#supplyPrice.form-control(type='number', name="supplyPrice", value="0", min="0")
+        .row
+          .col-md-2 Description
+          .col-md-10
+            textarea#supplyDesc.form-control(name="supplyDesc", placeholder="Supply Description")
+
+    #overlay-add-supply-dialog(title="Add New Supply")
+      form
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Name
+          .col-md-10
+            input#supplyName.form-control(type='text', name="supplyName", placeholder="Supply Name")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Price
+          .col-md-4
+            input#supplyPrice.form-control(type='number', name="supplyPrice", value="0", min="0")
+        .row(style="margin-bottom: 10px")
+          .col-md-2 Quantity
+          .col-md-4
+            input#supplyQuantity.form-control(type='number', name="supplyQuantity", value="0", min="0")
+        .row
+          .col-md-2 Description
+          .col-md-10
+            textarea#supplyDesc.form-control(name="supplyDesc", placeholder="Supply Description")
+
+    #overlay-add-supply-quantity-dialog(title="Add Quantity")
+      form
+        input#supplyID(type="hidden")
+        .row
+          .col-md-12
+            input#supplyQuantity.form-control.num_font(type='number', name="supplyQuantity", value="0", min="0")
